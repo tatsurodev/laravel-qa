@@ -11,6 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // Userが作成される度、それに関連するQestionを作成
+        // factory(App\Question::class, 10)->create()だとUserとのリレーションが設定されていないためエラーとなる
+        factory(App\User::class, 3)->create()->each(function ($u) {
+            // saveManyで複数の関連したモデルを保存
+            $u->questions()->saveMany(
+                // createでレコードの挿入、makeでメモリ上にオブジェクトの作成
+                factory(App\Question::class, rand(1, 5))->make()
+            );
+        });
     }
 }
