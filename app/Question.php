@@ -19,4 +19,15 @@ class Question extends Model
         $this->attributes['title'] = $value;
         $this->attributes['slug'] = str_slug($value);
     }
+
+    // アクセサ作成
+    public function getUrlAttribute()
+    {
+        return route('questions.show', $this->id);
+    }
+    // アクセサの定義はキャメルケースで、使用時の呼び出しはスネークケースで
+    public function getCreatedDateAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
 }
