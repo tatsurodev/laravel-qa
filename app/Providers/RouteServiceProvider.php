@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Question;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -23,7 +24,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // ルートパラメータのルートモデルバインディングで得られる値を変更する。ここでは、デフォルトのeloquentインスタンスからクエリビルダに変更
+        Route::bind('slug', function ($slug) {
+            // A ? A : B;
+            // A ?: B;
+            // A?? B;は、上記2つのAが未定義時にエラー表示がないバージョンと同値
+            return Question::where('slug', $slug)->first() ?? abort(404);
+        });
 
         parent::boot();
     }
@@ -52,8 +59,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -66,8 +73,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
     }
 }
