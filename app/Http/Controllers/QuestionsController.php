@@ -57,7 +57,11 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        // ++$question->views;
+        // $question->save();
+        // incrementメソッドは、クエリビルダ用メソッドで上記の処理と同じ
+        $question->increment('views');
+        return view('questions.show', compact('question'));
     }
 
     /**

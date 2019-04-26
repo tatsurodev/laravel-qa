@@ -23,7 +23,7 @@ class Question extends Model
     // アクセサ作成
     public function getUrlAttribute()
     {
-        return route('questions.show', $this->id);
+        return route('questions.show', $this->slug);
     }
     // アクセサの定義はキャメルケースで、使用時の呼び出しはスネークケースで
     public function getCreatedDateAttribute()
@@ -40,5 +40,11 @@ class Question extends Model
             return "answered";
         }
         return "unanswered";
+    }
+    // showで使用するbodyのアクセサ
+    public function getBodyHtmlAttribute()
+    {
+        // markdownパーサー使用
+        return \Parsedown::instance()->text($this->body);
     }
 }
