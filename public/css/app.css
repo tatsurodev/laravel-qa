@@ -10684,3 +10684,21 @@ a.text-dark:focus {
   height: 60px;
 }
 
+.counters .status.unanswered {
+  border: nono;
+}
+
+.counters .status.answered {
+  border: 1px solid #5fbb7e;
+  color: #5fbb7e;
+}
+
+.counters .status.answered-accepted {
+  background: #5fbb7e;
+  color: #fff;
+}
+
+.counters .view {
+  margin-top: 10px;
+}
+

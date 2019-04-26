@@ -27,4 +27,24 @@
         width: 60px;
         height: 60px;
     }
+
+    .status {
+        &.unanswered {
+            border: nono;
+        }
+
+        &.answered {
+            border: 1px solid $color-green;
+            color: $color-green;
+        }
+
+        &.answered-accepted {
+            background: $color-green;
+            color: $color-white;
+        }
+    }
+
+    .view {
+        margin-top: 10px;
+    }
 }
