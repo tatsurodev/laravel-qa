@@ -47,4 +47,16 @@ class Question extends Model
         // markdownパーサー使用
         return \Parsedown::instance()->text($this->body);
     }
+
+    // answersカラムがモデルにある時
+    // ex. $question->answers()->count()
+    // リレーションでアクセスするときは問題ない
+    // が、動的プロパティでアクセスする時
+    // ex. $question->answers->count(), foreach($question->answers as $answer)
+    // データベースから直接値を取得することになるのでエラーとなる
+    // よって、リレーションと同名のカラム名がある時は、カラム名かリレーションの名前、どちらかを変える必要がある
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }
