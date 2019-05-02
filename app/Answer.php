@@ -20,4 +20,14 @@ class Answer extends Model
     {
         return \Parsedown::instance()->text($this->body);
     }
+
+    // eloquent eventsを発火させる
+    public static function boot()
+    {
+        parent::boot();
+        // answer作成時にanswers_countをインクリメント
+        static::created(function ($answer) {
+            $answer->question->increment('answers_count');
+        });
+    }
 }
