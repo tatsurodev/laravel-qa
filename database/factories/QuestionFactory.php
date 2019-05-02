@@ -13,7 +13,7 @@ $factory->define(Question::class, function (Faker $faker) {
         // paragraphsの第二引数trueで文字列、falseで配列で返す
         'body' => $faker->paragraphs(rand(3, 7), true),
         'views' => rand(0, 10),
-        'answers' => rand(0, 10),
+        'answers_count' => rand(0, 10),
         'votes' => rand(-3, 10)
     ];
 });
