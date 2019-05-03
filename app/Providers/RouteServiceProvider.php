@@ -29,7 +29,8 @@ class RouteServiceProvider extends ServiceProvider
             // A ? A : B;
             // A ?: B;
             // A?? B;は、上記2つのAが未定義時にエラー表示がないバージョンと同値
-            return Question::where('slug', $slug)->first() ?? abort(404);
+            // foreach繰り返し用にwithでeager loading
+            return Question::with('answers.user')->where('slug', $slug)->first() ?? abort(404);
         });
 
         parent::boot();
