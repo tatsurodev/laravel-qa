@@ -40,4 +40,10 @@ class Answer extends Model
     {
         return $this->created_at->diffForHumans();
     }
+
+    // ベストアンサーの時、スタイリング用vote-acceptedクラスを返す
+    public function getStatusAttribute()
+    {
+        return $this->id === $this->question->best_answer_id ? 'vote-accepted' : '';
+    }
 }
