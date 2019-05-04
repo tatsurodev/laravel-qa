@@ -25,3 +25,6 @@ Route::get('/questions/{slug}', 'QuestionsController@show')->name('questions.sho
 // Route::post('/questions/{question}/answers', 'AnswersController@store')->name('answers.store');
 // AnswersController@index, create, showは、QuestionsController@showで共に表示されるので不要
 Route::resource('/questions.answers', 'AnswersController')->except(['index', 'create', 'show']);
+
+// ベストアンサー
+Route::post('/answers/{answer}/accept', 'AcceptAnswerController')->name('answers.accept');

@@ -59,4 +59,10 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class);
     }
+    //ベストアンサーidを格納
+    public function acceptBestAnswer(Answer $answer)
+    {
+        $this->best_answer_id = $answer->id;
+        $this->save();
+    }
 }
