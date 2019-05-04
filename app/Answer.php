@@ -44,6 +44,18 @@ class Answer extends Model
     // ベストアンサーの時、スタイリング用vote-acceptedクラスを返す
     public function getStatusAttribute()
     {
-        return $this->id === $this->question->best_answer_id ? 'vote-accepted' : '';
+        return $this->isBest() ? 'vote-accepted' : '';
+    }
+
+    // isBestのアクセサ
+    public function getIsBestAttribute()
+    {
+        return $this->isBest();
+    }
+
+    // ベストアンサーがどうか判定
+    public function isBest()
+    {
+        return $this->id === $this->question->best_answer_id;
     }
 }

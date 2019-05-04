@@ -33,4 +33,10 @@ class AnswerPolicy
     {
         return $user->id === $answer->user_id;
     }
+
+    // ベストアンサーにする権限は、question作成者のみ
+    public function accept(User $user, Answer $answer)
+    {
+        return $user->id === $answer->question->user_id;
+    }
 }
