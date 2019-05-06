@@ -60,4 +60,14 @@ class User extends Authenticatable
         $size = 32;
         return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=" . $size;
     }
+
+    // Favorite用多対多リレーション定義
+    // 第1引数では最終的な接続先モデルを指定する
+    // 第2引数では中間テーブル名を指定する
+    // 第3引数では接続元モデルIDを示す中間テーブル内のカラムを指定する
+    // 第4引数では接続先モデルIDを示す中間テーブル内のカラムを指定する
+    public function favorites()
+    {
+        return $this->belongsToMany(Question::class, 'favorites'); //, 'author_id', 'question_id');
+    }
 }
