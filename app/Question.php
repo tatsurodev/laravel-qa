@@ -68,6 +68,22 @@ class Question extends Model
 
     public function favorites()
     {
-        return $this->belongsToMany(User::class, 'favorite');
+        return $this->belongsToMany(User::class, 'favorites');
+    }
+
+    // ユーザーがお気に入り登録しているかどうか
+    public function isFavorited()
+    {
+        return $this->favorites()->where('user_id', auth()->id())->count() > 0;
+    }
+    // isFavoritedのアクセサ
+    public function getIsFavoritedAttribute()
+    {
+        return $this->isFavorited();
+    }
+    // お気に入り数を返すアクセサ
+    public function getFavoritesCountAttribute()
+    {
+        return $this->favorites->count();
     }
 }
