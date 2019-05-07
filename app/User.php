@@ -68,6 +68,6 @@ class User extends Authenticatable
     // 第4引数では接続先モデルIDを示す中間テーブル内のカラムを指定する
     public function favorites()
     {
-        return $this->belongsToMany(Question::class, 'favorites'); //, 'author_id', 'question_id');
+        return $this->belongsToMany(Question::class, 'favorites')->withTimestamps(); //, 'author_id', 'question_id');
     }
 }

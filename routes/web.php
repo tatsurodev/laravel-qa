@@ -28,3 +28,7 @@ Route::resource('/questions.answers', 'AnswersController')->except(['index', 'cr
 
 // ベストアンサー
 Route::post('/answers/{answer}/accept', 'AcceptAnswerController')->name('answers.accept');
+
+// お気に入り
+Route::post('/questions/{question}/favorites', 'FavoritesController@store')->name('questions.favorite');
+Route::delete('/questions/{question}/favorites', 'FavoritesController@destroy')->name('questions.unfavorite');
