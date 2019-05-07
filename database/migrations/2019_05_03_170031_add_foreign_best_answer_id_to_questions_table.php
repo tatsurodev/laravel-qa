@@ -20,6 +20,7 @@ class AddForeignBestAnswerIdToQuestionsTable extends Migration
             $table->foreign('best_answer_id')
                 ->references('id')
                 ->on('answers')
+                // 参照先のanswers.idが削除更新された時、questions.best_answer_idをnullにする
                 ->onDelete('SET NULL');
         });
     }

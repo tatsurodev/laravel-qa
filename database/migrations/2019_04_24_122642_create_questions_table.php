@@ -29,6 +29,7 @@ class CreateQuestionsTable extends Migration
             $table->timestamps();
 
             // 親テーブルusersの主キーidと子テーブルquestionsの外部キーuser_idを関連付け
+            // 参照先のusers.idが削除更新された時、questions.user_idを一緒に削除更新する
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
