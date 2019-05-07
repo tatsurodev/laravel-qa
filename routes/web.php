@@ -32,3 +32,6 @@ Route::post('/answers/{answer}/accept', 'AcceptAnswerController')->name('answers
 // お気に入り
 Route::post('/questions/{question}/favorites', 'FavoritesController@store')->name('questions.favorite');
 Route::delete('/questions/{question}/favorites', 'FavoritesController@destroy')->name('questions.unfavorite');
+
+// vote機能用
+Route::post('/questions/{question}/vote', 'VoteQuestionController');
