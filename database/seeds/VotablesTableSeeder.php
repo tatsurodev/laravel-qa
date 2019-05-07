@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Question;
+use App\Answer;
 
 class VotablesTableSeeder extends Seeder
 {
@@ -13,8 +14,8 @@ class VotablesTableSeeder extends Seeder
      */
     public function run()
     {
-        // 元からあるQuestionのvoteレコードを削除
-        \DB::table('votables')->where('votable_type', 'App\Question')->delete();
+        // 元からあるvoteレコードを削除
+        \DB::table('votables')->delete();
 
         $users = User::all();
         $numberOfUsers = $users->count();
@@ -25,6 +26,14 @@ class VotablesTableSeeder extends Seeder
             for ($i = 0; $i < rand(0, $numberOfUsers); $i++) {
                 $user = $users[$i];
                 $user->voteQuestion($question, $votes[rand(0, 1)]);
+            }
+        }
+
+        // 全answerがユーザーからランダムにvoteを受ける
+        foreach (Answer::all() as $answer) {
+            for ($i = 0; $i < rand(0, $numberOfUsers); $i++) {
+                $user = $users[$i];
+                $user->voteAnswer($answer, $votes[rand(0, 1)]);
             }
         }
     }
